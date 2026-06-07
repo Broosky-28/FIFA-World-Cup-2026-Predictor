@@ -139,7 +139,7 @@ This project uses historical international football match data.
 
 Primary Dataset:
 
-[International Football Results (1872–2017) Dataset on Kaggle](https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2    17?utm_source=chatgpt.com)
+[International Football Results (1872–2017) Dataset on Kaggle](https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017)
 
 The dataset contains:
 
@@ -396,7 +396,7 @@ FIFA2026_Project
 
 Clone the repository:
 
-git clone [https://github.com/YOUR_USERNAME/FIFA2026-Predictor.git](https://github.com/YOUR_USERNAME/FIFA2026-Predictor.git)
+git clone [https://github.com/Broosky-28/FIFA-World-Cup-2026-Predictor.git](https://github.com/Broosky-28/FIFA-World-Cup2026-Predictor.git)
 
 Move into the project directory:
 
@@ -468,17 +468,6 @@ This project demonstrates how historical sports data can be transformed into int
 
 Beyond predicting match outcomes, the project serves as a practical example of applying AI and data science techniques to a real-world forecasting challenge.
 
-    
-
-# 🙏 Acknowledgements
-
-Special thanks to:
-
-• [Kaggle](https://www.kaggle.com?utm_source=chatgpt.com)
-
-• [International Football Results Dataset by Mart Jürisoo](https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017?utm_source=chatgpt.com)
-
-• The Open-Source Python and Machine Learning Community
 
    
 
