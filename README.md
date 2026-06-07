@@ -452,7 +452,7 @@ Planned upgrades include:
 
    
 
-# 👨‍💻 About the Developer
+# 👨‍💻 About Me
 
 I built this project to combine my interests in:
 
