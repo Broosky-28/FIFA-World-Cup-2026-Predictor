@@ -6,18 +6,18 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 import random
 
-# ==================================================
-# PAGE CONFIG
-# ==================================================
+  
+   #PAGE CONFIG
+   
 
 st.set_page_config(
     page_title="FIFA World Cup 2026 Predictor",
     layout="wide"
 )
 
-# ==================================================
+   
 # LOAD FILES
-# ==================================================
+
 
 @st.cache_resource
 def load_model():
@@ -40,9 +40,9 @@ xgb = load_model()
 team_stats = load_team_stats()
 champion_df = load_predictions()
 
-# ==================================================
+  
 # GROUPS
-# ==================================================
+ 
 
 groups = {
 
@@ -71,10 +71,8 @@ groups = {
 "L": ["England","Croatia","Ghana","Panama"]
 
 }
-
-# ==================================================
-# HELPERS
-# ==================================================
+  
+# HELPERS  
 
 def get_team_stats(team):
 
@@ -147,9 +145,9 @@ def create_features(
     return pd.DataFrame([data])
 
 
-# ==================================================
+  
 # MATCH PREDICTION
-# ==================================================
+  
 
 def simulate_match(
     home_team,
@@ -171,9 +169,9 @@ def simulate_match(
     return outcome
 
 
-# ==================================================
+  
 # GOAL SIMULATION
-# ==================================================
+  
 
 def simulate_match_score(
     home_team,
@@ -223,9 +221,9 @@ def simulate_match_score(
     )
 
 
-# ==================================================
+  
 # GROUP STAGE
-# ==================================================
+  
 
 def initialize_group_table(
     group_teams
@@ -397,9 +395,9 @@ def simulate_all_groups():
     return results
 
 
-# ==================================================
+  
 # QUALIFICATION
-# ==================================================
+  
 
 def get_32_qualified_teams(
     group_results
@@ -453,9 +451,9 @@ def get_32_qualified_teams(
     return qualified
 
 
-# ==================================================
+  
 # KNOCKOUTS
-# ==================================================
+  
 
 def play_knockout_match(
     team1,
@@ -551,9 +549,9 @@ def simulate_world_cup(
 
     return teams[0]
 
-# ==================================================
+  
 # SIDEBAR
-# ==================================================
+  
 
 st.sidebar.title(
     "⚽ FIFA 2026 Predictor"
@@ -581,9 +579,9 @@ page = st.sidebar.radio(
 
 )
 
-# ==================================================
+  
 # MATCH PREDICTOR
-# ==================================================
+ 
 
 if page == "Match Predictor":
 
@@ -641,9 +639,9 @@ if page == "Match Predictor":
             f"{away_team} Win: {probs[0]*100:.2f}%"
         )
 
-# ==================================================
+  
 # TEAM INFO
-# ==================================================
+  
 
 elif page == "Team Information":
 
@@ -679,9 +677,9 @@ elif page == "Team Information":
         f"{stats['win_rate']*100:.2f}%"
     )
 
-# ==================================================
+  
 # GROUPS
-# ==================================================
+  
 
 elif page == "World Cup Groups":
 
@@ -699,9 +697,9 @@ elif page == "World Cup Groups":
             teams
         )
 
-# ==================================================
+ 
 # TOURNAMENT
-# ==================================================
+  
 
 elif page == "Tournament Simulator":
 
@@ -746,11 +744,11 @@ elif page == "Tournament Simulator":
             f"🏆 Champion: {champion}"
         )
 
-# ==================================================
+ 
 # MONTE CARLO
-# ==================================================
+ 
 
-elif page == "Monte Carlo Simulator":
+elif page == "Tournament Simulator":
 
     simulations = st.slider(
         "Simulations",
@@ -849,9 +847,9 @@ elif page == "Monte Carlo Simulator":
             )["Probability"]
         )
 
-# ==================================================
+  
 # CHAMPION PROBABILITIES
-# ==================================================
+  
 
 elif page == "Champion Probabilities":
 
