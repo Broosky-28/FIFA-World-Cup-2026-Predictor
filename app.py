@@ -638,8 +638,33 @@ if page == "Match Predictor":
         st.write(
             f"{away_team} Win: {probs[0]*100:.2f}%"
         )
+        # Most Likely Score
 
-  
+        scores = []
+        for _ in range(500):
+            hg, ag = simulate_match_score(
+                home_team,
+                away_team
+            )
+
+            scores.append(
+                (hg, ag)
+            )
+
+        predicted_score = max(
+            set(scores),
+            key=scores.count
+        )
+
+        st.subheader(
+            "Most Likely Score"
+        )
+
+        st.success(
+            f"{home_team} {predicted_score[0]} - {predicted_score[1]} {away_team}"
+        )
+
+
 # TEAM INFO
   
 
@@ -700,7 +725,6 @@ elif page == "World Cup Groups":
  
 # TOURNAMENT
   
-
 elif page == "Tournament Simulator":
 
     st.header(
@@ -715,6 +739,10 @@ elif page == "Tournament Simulator":
             simulate_all_groups()
         )
 
+        st.header(
+            "Group Stage Results"
+        )
+
         for (
             group_name,
             table
@@ -725,7 +753,8 @@ elif page == "Tournament Simulator":
             )
 
             st.dataframe(
-                table
+                table,
+                use_container_width=True
             )
 
         qualified = (
@@ -734,21 +763,144 @@ elif page == "Tournament Simulator":
             )
         )
 
-        champion = (
-            simulate_world_cup(
-                qualified
-            )
+        st.header(
+            "Qualified Teams"
         )
 
+        qualified_df = pd.DataFrame(
+            {
+                "Qualified Teams":
+                qualified
+            }
+        )
+
+        st.dataframe(
+            qualified_df,
+            use_container_width=True
+        )
+
+        random.shuffle(
+            qualified
+        )
+
+        teams = qualified.copy()
+
+        round_names = [
+
+            "Round of 32",
+
+            "Round of 16",
+
+            "Quarter Finals",
+
+            "Semi Finals",
+
+            "Final"
+
+        ]
+
+        round_no = 0
+
+        while len(teams) > 1:
+
+            st.header(
+                round_names[
+                    round_no
+                ]
+            )
+
+            winners = []
+
+            matches = []
+
+            for i in range(
+                0,
+                len(teams),
+                2
+            ):
+
+                team1 = teams[i]
+
+                team2 = teams[
+                    i + 1
+                ]
+
+                home_goals, away_goals = (
+                    simulate_match_score(
+                        team1,
+                        team2
+                    )
+                )
+
+                if (
+                    home_goals >
+                    away_goals
+                ):
+
+                    winner = team1
+
+                elif (
+                    away_goals >
+                    home_goals
+                ):
+
+                    winner = team2
+
+                else:
+
+                    winner = random.choice(
+                        [
+                            team1,
+                            team2
+                        ]
+                    )
+
+                matches.append(
+                    {
+                        "Team 1":
+                        team1,
+
+                        "Score":
+                        f"{home_goals}-{away_goals}",
+
+                        "Team 2":
+                        team2,
+
+                        "Winner":
+                        winner
+                    }
+                )
+
+                winners.append(
+                    winner
+                )
+
+            round_df = pd.DataFrame(
+                matches
+            )
+
+            st.dataframe(
+                round_df,
+                use_container_width=True
+            )
+
+            teams = winners
+
+            round_no += 1
+
+        champion = teams[0]
+
+        st.balloons()
+
         st.success(
-            f"🏆 Champion: {champion}"
+            f"🏆 FIFA World Cup Champion: {champion}"
         )
 
  
 # MONTE CARLO
  
 
-elif page == "Tournament Simulator":
+elif page == "Monte Carlo Simulator":
 
     simulations = st.slider(
         "Simulations",
